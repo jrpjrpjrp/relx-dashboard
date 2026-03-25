@@ -1,0 +1,296 @@
+[
+  {
+    "year": 2016,
+    "segment": "Exhibitions",
+    "revenue": 1047.0,
+    "adjOpProfit": 271.0,
+    "adjOpMargin": 25.9
+  },
+  {
+    "year": 2016,
+    "segment": "Legal",
+    "revenue": 1619.0,
+    "adjOpProfit": 312.0,
+    "adjOpMargin": 19.3
+  },
+  {
+    "year": 2016,
+    "segment": "Risk",
+    "revenue": 1905.0,
+    "adjOpProfit": 685.0,
+    "adjOpMargin": 36.0
+  },
+  {
+    "year": 2016,
+    "segment": "STM",
+    "revenue": 2318.0,
+    "adjOpProfit": 854.0,
+    "adjOpMargin": 36.8
+  },
+  {
+    "year": 2017,
+    "segment": "Exhibitions",
+    "revenue": 1109.0,
+    "adjOpProfit": 287.0,
+    "adjOpMargin": 25.9
+  },
+  {
+    "year": 2017,
+    "segment": "Legal",
+    "revenue": 1686.0,
+    "adjOpProfit": 328.0,
+    "adjOpMargin": 19.5
+  },
+  {
+    "year": 2017,
+    "segment": "Risk",
+    "revenue": 2073.0,
+    "adjOpProfit": 760.0,
+    "adjOpMargin": 36.7
+  },
+  {
+    "year": 2017,
+    "segment": "STM",
+    "revenue": 2473.0,
+    "adjOpProfit": 914.0,
+    "adjOpMargin": 37.0
+  },
+  {
+    "year": 2018,
+    "segment": "Exhibitions",
+    "revenue": 1219.0,
+    "adjOpProfit": 313.0,
+    "adjOpMargin": 25.7
+  },
+  {
+    "year": 2018,
+    "segment": "Legal",
+    "revenue": 1618.0,
+    "adjOpProfit": 320.0,
+    "adjOpMargin": 19.8
+  },
+  {
+    "year": 2018,
+    "segment": "Risk",
+    "revenue": 2117.0,
+    "adjOpProfit": 776.0,
+    "adjOpMargin": 36.7
+  },
+  {
+    "year": 2018,
+    "segment": "STM",
+    "revenue": 2538.0,
+    "adjOpProfit": 942.0,
+    "adjOpMargin": 37.1
+  },
+  {
+    "year": 2019,
+    "segment": "Exhibitions",
+    "revenue": 1269.0,
+    "adjOpProfit": 331.0,
+    "adjOpMargin": 26.1
+  },
+  {
+    "year": 2019,
+    "segment": "Legal",
+    "revenue": 1652.0,
+    "adjOpProfit": 330.0,
+    "adjOpMargin": 20.0
+  },
+  {
+    "year": 2019,
+    "segment": "Risk",
+    "revenue": 2316.0,
+    "adjOpProfit": 853.0,
+    "adjOpMargin": 36.8
+  },
+  {
+    "year": 2019,
+    "segment": "STM",
+    "revenue": 2637.0,
+    "adjOpProfit": 982.0,
+    "adjOpMargin": 37.2
+  },
+  {
+    "year": 2020,
+    "segment": "Exhibitions",
+    "revenue": 362.0,
+    "adjOpProfit": 2252.0,
+    "adjOpMargin": 622.1
+  },
+  {
+    "year": 2020,
+    "segment": "Legal",
+    "revenue": 1639.0,
+    "adjOpProfit": 330.0,
+    "adjOpMargin": 20.1
+  },
+  {
+    "year": 2020,
+    "segment": "Risk",
+    "revenue": 2417.0,
+    "adjOpProfit": 894.0,
+    "adjOpMargin": 37.0
+  },
+  {
+    "year": 2020,
+    "segment": "STM",
+    "revenue": 2692.0,
+    "adjOpProfit": 1021.0,
+    "adjOpMargin": 37.9
+  },
+  {
+    "year": 2021,
+    "segment": "Exhibitions",
+    "revenue": 534.0,
+    "adjOpProfit": 162.0,
+    "adjOpMargin": 30.3
+  },
+  {
+    "year": 2021,
+    "segment": "Legal",
+    "revenue": 1587.0,
+    "adjOpProfit": 326.0,
+    "adjOpMargin": 20.5
+  },
+  {
+    "year": 2021,
+    "segment": "Risk",
+    "revenue": 2474.0,
+    "adjOpProfit": 915.0,
+    "adjOpMargin": 37.0
+  },
+  {
+    "year": 2021,
+    "segment": "STM",
+    "revenue": 2649.0,
+    "adjOpProfit": 1001.0,
+    "adjOpMargin": 37.8
+  },
+  {
+    "year": 2022,
+    "segment": "Exhibitions",
+    "revenue": 953.0,
+    "adjOpProfit": 162.0,
+    "adjOpMargin": 17.0
+  },
+  {
+    "year": 2022,
+    "segment": "Legal",
+    "revenue": 1782.0,
+    "adjOpProfit": 372.0,
+    "adjOpMargin": 20.9
+  },
+  {
+    "year": 2022,
+    "segment": "Risk",
+    "revenue": 2909.0,
+    "adjOpProfit": 1078.0,
+    "adjOpMargin": 37.1
+  },
+  {
+    "year": 2022,
+    "segment": "STM",
+    "revenue": 2909.0,
+    "adjOpProfit": 1100.0,
+    "adjOpMargin": 37.8
+  },
+  {
+    "year": 2023,
+    "segment": "Exhibitions",
+    "revenue": 1115.0,
+    "adjOpProfit": 319.0,
+    "adjOpMargin": 28.6
+  },
+  {
+    "year": 2023,
+    "segment": "Legal",
+    "revenue": 1851.0,
+    "adjOpProfit": 393.0,
+    "adjOpMargin": 21.2
+  },
+  {
+    "year": 2023,
+    "segment": "Risk",
+    "revenue": 3133.0,
+    "adjOpProfit": 1165.0,
+    "adjOpMargin": 37.2
+  },
+  {
+    "year": 2023,
+    "segment": "STM",
+    "revenue": 3062.0,
+    "adjOpProfit": 1165.0,
+    "adjOpMargin": 38.0
+  },
+  {
+    "year": 2024,
+    "segment": "Exhibitions",
+    "revenue": 1239.0,
+    "adjOpProfit": 398.0,
+    "adjOpMargin": 32.1
+  },
+  {
+    "year": 2024,
+    "segment": "Legal",
+    "revenue": 1718.0,
+    "adjOpProfit": 381.0,
+    "adjOpMargin": 22.2
+  },
+  {
+    "year": 2024,
+    "segment": "Print",
+    "revenue": 517.0,
+    "adjOpProfit": 217.0,
+    "adjOpMargin": 42.0
+  },
+  {
+    "year": 2024,
+    "segment": "Risk",
+    "revenue": 3336.0,
+    "adjOpProfit": 1233.0,
+    "adjOpMargin": 37.0
+  },
+  {
+    "year": 2024,
+    "segment": "STM",
+    "revenue": 2624.0,
+    "adjOpProfit": 981.0,
+    "adjOpMargin": 37.4
+  },
+  {
+    "year": 2025,
+    "segment": "Exhibitions",
+    "revenue": 1186.0,
+    "adjOpProfit": 410.0,
+    "adjOpMargin": 34.6
+  },
+  {
+    "year": 2025,
+    "segment": "Legal",
+    "revenue": 1806.0,
+    "adjOpProfit": 415.0,
+    "adjOpMargin": 23.0
+  },
+  {
+    "year": 2025,
+    "segment": "Print",
+    "revenue": 399.0,
+    "adjOpProfit": 185.0,
+    "adjOpMargin": 46.4
+  },
+  {
+    "year": 2025,
+    "segment": "Risk",
+    "revenue": 3485.0,
+    "adjOpProfit": 1305.0,
+    "adjOpMargin": 37.4
+  },
+  {
+    "year": 2025,
+    "segment": "STM",
+    "revenue": 2714.0,
+    "adjOpProfit": 1035.0,
+    "adjOpMargin": 38.1
+  }
+]

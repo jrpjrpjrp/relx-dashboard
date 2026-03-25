@@ -1,0 +1,50 @@
+[
+  {
+    "year": 2025,
+    "dividendsPaid": 1181,
+    "buybacks": 1500,
+    "acquisitions": 260,
+    "vcInvestments": 42,
+    "netDebtChange": 638
+  },
+  {
+    "year": 2024,
+    "dividendsPaid": 1077,
+    "buybacks": 1500,
+    "acquisitions": 191,
+    "vcInvestments": 36,
+    "netDebtChange": 444
+  },
+  {
+    "year": 2023,
+    "dividendsPaid": 939,
+    "buybacks": 1000,
+    "acquisitions": 319,
+    "vcInvestments": 36,
+    "netDebtChange": 261
+  },
+  {
+    "year": 2022,
+    "dividendsPaid": 827,
+    "buybacks": 750,
+    "acquisitions": 316,
+    "vcInvestments": 26,
+    "netDebtChange": -13
+  },
+  {
+    "year": 2021,
+    "dividendsPaid": 737,
+    "buybacks": 550,
+    "acquisitions": 296,
+    "vcInvestments": 20,
+    "netDebtChange": -196
+  },
+  {
+    "year": 2020,
+    "dividendsPaid": 738,
+    "buybacks": 200,
+    "acquisitions": 218,
+    "vcInvestments": 18,
+    "netDebtChange": 219
+  }
+]
