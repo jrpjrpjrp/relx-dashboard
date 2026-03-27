@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import type { AnnualRow, SegmentRow, CapitalAllocationRow } from "@/lib/types";
+import { fmtM, GBP_TO_USD } from "@/lib/format";
 import { KpiCard } from "./KpiCard";
 import { RevenueSegmentChart } from "./charts/RevenueSegmentChart";
 import { AopSegmentChart } from "./charts/AopSegmentChart";
@@ -9,11 +10,19 @@ import { CashDeploymentChart } from "./charts/CashDeploymentChart";
 import { FcfBridgeChart } from "./charts/FcfBridgeChart";
 import { DebtProfileChart } from "./charts/DebtProfileChart";
 import { SegmentCompareChart } from "./charts/SegmentCompareChart";
+import { SegmentScatterChart } from "./charts/SegmentScatterChart";
+import { CumulativeReturnsChart } from "./charts/CumulativeReturnsChart";
+import { FcfWaterfallChart } from "./charts/FcfWaterfallChart";
+import { SegmentDeepDiveTab } from "./SegmentDeepDiveTab";
 
 const TABS = [
   "Group Overview",
   "Capital Allocation",
   "Segment Comparison",
+  "Risk Solutions",
+  "STM",
+  "Legal",
+  "Exhibitions",
 ] as const;
 type Tab = (typeof TABS)[number];
 
@@ -37,6 +46,7 @@ interface Props {
 
 export function DashboardTabs({ annualRows, segmentRows, capitalRows }: Props) {
   const [active, setActive] = useState<Tab>("Group Overview");
+  const [currency, setCurrency] = useState<"GBP" | "USD">("GBP");
 
   const latest = annualRows[annualRows.length - 1];
   const prev = annualRows[annualRows.length - 2];
@@ -45,24 +55,42 @@ export function DashboardTabs({ annualRows, segmentRows, capitalRows }: Props) {
     <div>
       {/* Tab bar */}
       <div className="mb-8 border-b border-[#EBEBEB]">
-        <div className="flex flex-wrap items-end gap-0">
-          {TABS.map((tab) => {
-            const isActive = active === tab;
-            return (
+        <div className="flex flex-wrap items-end gap-0 justify-between">
+          <div className="flex flex-wrap items-end gap-0">
+            {TABS.map((tab) => {
+              const isActive = active === tab;
+              return (
+                <button
+                  key={tab}
+                  onClick={() => setActive(tab)}
+                  className={[
+                    "px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.12em] transition-all cursor-pointer select-none",
+                    isActive
+                      ? "bg-[#0B2342] text-white -mb-px pb-[11px]"
+                      : "text-[#6B7280] hover:text-[#0B2342] hover:bg-[#F5F7FA]",
+                  ].join(" ")}
+                >
+                  {tab}
+                </button>
+              );
+            })}
+          </div>
+          <div className="flex items-center gap-1 pb-2 pr-1">
+            {(["GBP", "USD"] as const).map((c) => (
               <button
-                key={tab}
-                onClick={() => setActive(tab)}
+                key={c}
+                onClick={() => setCurrency(c)}
                 className={[
-                  "px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.12em] transition-all cursor-pointer select-none",
-                  isActive
-                    ? "bg-[#0B2342] text-white -mb-px pb-[11px]"
-                    : "text-[#6B7280] hover:text-[#0B2342] hover:bg-[#F5F7FA]",
+                  "px-3 py-1 text-[10px] font-mono font-semibold rounded transition-all cursor-pointer",
+                  currency === c
+                    ? "bg-[#0B2342] text-white"
+                    : "text-[#6B7280] border border-[#EBEBEB] hover:border-[#0B2342]",
                 ].join(" ")}
               >
-                {tab}
+                {c === "GBP" ? "£ GBP" : `$ USD (×${GBP_TO_USD})`}
               </button>
-            );
-          })}
+            ))}
+          </div>
         </div>
       </div>
 
@@ -71,10 +99,10 @@ export function DashboardTabs({ annualRows, segmentRows, capitalRows }: Props) {
         <div>
           {/* KPI strip */}
           {latest && (
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 mb-10">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-6 mb-10">
               <KpiCard
                 label="Revenue"
-                value={`£${(latest.revenue / 1000).toFixed(2)}bn`}
+                value={fmtM(latest.revenue, currency)}
                 sub={`FY${latest.year}`}
                 delta={latest.revenueGrowthYoY != null ? `+${latest.revenueGrowthYoY.toFixed(1)}% YoY` : undefined}
                 deltaPositive
@@ -82,7 +110,7 @@ export function DashboardTabs({ annualRows, segmentRows, capitalRows }: Props) {
               <KpiCard
                 label="Adj. op margin"
                 value={latest.adjOperatingMargin != null ? `${latest.adjOperatingMargin.toFixed(1)}%` : "—"}
-                sub={`£${((latest.adjOperatingProfit ?? 0) / 1000).toFixed(2)}bn AOP`}
+                sub={`${fmtM(latest.adjOperatingProfit, currency)} AOP`}
                 delta={prev?.adjOperatingMargin != null && latest.adjOperatingMargin != null
                   ? `${(latest.adjOperatingMargin - prev.adjOperatingMargin).toFixed(1)}pp vs prior year`
                   : undefined}
@@ -95,14 +123,14 @@ export function DashboardTabs({ annualRows, segmentRows, capitalRows }: Props) {
               />
               <KpiCard
                 label="FCF before divs"
-                value={latest.fcfBeforeDividends != null ? `£${(latest.fcfBeforeDividends / 1000).toFixed(2)}bn` : "—"}
+                value={fmtM(latest.fcfBeforeDividends, currency)}
                 sub={latest.fcfMargin != null ? `${latest.fcfMargin.toFixed(1)}% FCF margin` : undefined}
                 accent="#1E5EAA"
               />
               <KpiCard
                 label="Net debt / EBITDA"
                 value={latest.netDebtToEbitda != null ? `${latest.netDebtToEbitda.toFixed(1)}×` : "—"}
-                sub={latest.netDebt != null ? `£${(latest.netDebt / 1000).toFixed(2)}bn net debt` : undefined}
+                sub={latest.netDebt != null ? `${fmtM(latest.netDebt, currency)} net debt` : undefined}
                 accent="#C84040"
               />
               <KpiCard
@@ -112,10 +140,21 @@ export function DashboardTabs({ annualRows, segmentRows, capitalRows }: Props) {
                 accent="#D47C00"
               />
               <KpiCard
-                label="Dividend per share"
-                value={latest.dividendPerShare != null ? `${latest.dividendPerShare.toFixed(1)}p` : "—"}
-                sub={`FY${latest.year}`}
+                label="Cash conversion"
+                value={latest.adjCashFlow != null && latest.adjOperatingProfit != null
+                  ? `${(latest.adjCashFlow / latest.adjOperatingProfit * 100).toFixed(0)}%`
+                  : "—"}
+                sub="Adj. cash flow / adj. op profit"
                 accent="#8B8B8B"
+              />
+              <KpiCard
+                label="ROIC"
+                value={latest.roic != null ? `${latest.roic.toFixed(1)}%` : "—"}
+                sub={prev?.roic != null && latest.roic != null
+                  ? `${(latest.roic - prev.roic) >= 0 ? "+" : ""}${(latest.roic - prev.roic).toFixed(1)}pp vs prior year`
+                  : "Return on invested capital"}
+                deltaPositive={prev?.roic != null && latest.roic != null ? latest.roic >= prev.roic : undefined}
+                accent="#6B3FA0"
               />
             </div>
           )}
@@ -141,6 +180,14 @@ export function DashboardTabs({ annualRows, segmentRows, capitalRows }: Props) {
           <Section fig="FIG B3">
             <DebtProfileChart rows={annualRows} />
           </Section>
+          <Section fig="FIG B4">
+            <CumulativeReturnsChart rows={capitalRows} />
+          </Section>
+          {latest && (
+            <Section fig="FIG B5">
+              <FcfWaterfallChart row={latest} />
+            </Section>
+          )}
         </div>
       )}
 
@@ -170,6 +217,10 @@ export function DashboardTabs({ annualRows, segmentRows, capitalRows }: Props) {
               title="Risk outgrows the group every year; Exhibitions volatile (COVID) then recovered sharply"
               subtitle="YoY revenue growth by segment (%) — annual trend"
             />
+          </Section>
+
+          <Section fig="FIG C5">
+            <SegmentScatterChart segmentRows={segmentRows} />
           </Section>
 
           {/* Latest year snapshot table */}
@@ -219,6 +270,26 @@ export function DashboardTabs({ annualRows, segmentRows, capitalRows }: Props) {
             );
           })()}
         </div>
+      )}
+
+      {/* ── TAB 4: Risk Solutions ──────────────────────────────────────────────── */}
+      {active === "Risk Solutions" && (
+        <SegmentDeepDiveTab segmentName="Risk" segmentRows={segmentRows} annualRows={annualRows} figPrefix="D" />
+      )}
+
+      {/* ── TAB 5: STM ────────────────────────────────────────────────────────── */}
+      {active === "STM" && (
+        <SegmentDeepDiveTab segmentName="STM" segmentRows={segmentRows} annualRows={annualRows} figPrefix="E" />
+      )}
+
+      {/* ── TAB 6: Legal ──────────────────────────────────────────────────────── */}
+      {active === "Legal" && (
+        <SegmentDeepDiveTab segmentName="Legal" segmentRows={segmentRows} annualRows={annualRows} figPrefix="F" />
+      )}
+
+      {/* ── TAB 7: Exhibitions ────────────────────────────────────────────────── */}
+      {active === "Exhibitions" && (
+        <SegmentDeepDiveTab segmentName="Exhibitions" segmentRows={segmentRows} annualRows={annualRows} figPrefix="G" />
       )}
     </div>
   );

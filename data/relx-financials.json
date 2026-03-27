@@ -5,6 +5,7 @@
   },
   "2015": {
     "year": 2015,
+    "revenue": 5971.0,
     "grossProfit": 3842.0,
     "reportedOpProfit": 1497.0,
     "pbt": 1312.0,
@@ -20,8 +21,10 @@
   },
   "2016": {
     "year": 2016,
+    "revenue": 6889.0,
     "grossProfit": 4401.0,
     "reportedOpProfit": 1708.0,
+    "adjOperatingProfit": 2114.0,
     "pbt": 1459.0,
     "taxCharge": 301.0,
     "netIncome": 1158.0,
@@ -38,8 +41,14 @@
   },
   "2017": {
     "year": 2017,
+    "revenue": 7341.0,
     "grossProfit": 4713.0,
     "reportedOpProfit": 1905.0,
+    "adjOperatingProfit": 2284.0,
+    "adjPBT": 2101.0,
+    "adjNetProfit": 1620.0,
+    "adjCashFlow": 2197.0,
+    "adjEPS": 80.2,
     "pbt": 1721.0,
     "taxCharge": 65.0,
     "netIncome": 1656.0,
@@ -53,13 +62,10 @@
     "dividendsPaid": 772.0,
     "employeeCosts": 2273.0,
     "costOfSales": 2628.0,
-    "adjOperatingProfit": 1964.0,
-    "adjPBT": 1720.0,
-    "adjNetProfit": 1422.0,
-    "adjCashFlow": 2243.0,
     "netInterestPaid": 155.0,
     "fcfBeforeDividends": 1593.0,
-    "dividendsPaidToShareholders": 796.0
+    "dividendsPaidToShareholders": 796.0,
+    "roic": 12.9
   },
   "2018": {
     "year": 2018,
@@ -80,14 +86,16 @@
     "dividendsPaid": 804.0,
     "employeeCosts": 2350.0,
     "costOfSales": 2644.0,
-    "adjOperatingProfit": 2101.0,
-    "ebitda": 2.5,
-    "adjPBT": 1847.0,
-    "adjNetProfit": 1505.0,
-    "adjCashFlow": 2402.0,
+    "adjOperatingProfit": 2346.0,
+    "adjPBT": 2145.0,
+    "adjNetProfit": 1674.0,
+    "adjCashFlow": 2243.0,
+    "adjEPS": 84.7,
     "netInterestPaid": 171.0,
     "fcfBeforeDividends": 1700.0,
-    "dividendsPaidToShareholders": 842.0
+    "dividendsPaidToShareholders": 842.0,
+    "underlyingRevenueGrowth": 4,
+    "roic": 13.2
   },
   "2019": {
     "year": 2019,
@@ -108,16 +116,17 @@
     "dividendsPaid": 851.0,
     "employeeCosts": 2498.0,
     "costOfSales": 2755.0,
-    "adjOperatingProfit": 1525.0,
-    "ebitda": 3.3,
-    "adjPBT": 1483.0,
-    "adjNetProfit": 1224.0,
-    "adjCashFlow": 2009.0,
-    "adjEPS": 19.0,
+    "adjOperatingProfit": 2491.0,
+    "adjPBT": 2200.0,
+    "adjNetProfit": 1808.0,
+    "adjCashFlow": 2402.0,
+    "adjEPS": 93.0,
     "netInterestPaid": 172.0,
     "cashTaxPaid": 496.0,
     "fcfBeforeDividends": 1223.0,
-    "dividendsPaidToShareholders": 880.0
+    "dividendsPaidToShareholders": 880.0,
+    "underlyingRevenueGrowth": 4,
+    "roic": 13.6
   },
   "2020": {
     "year": 2020,
@@ -140,14 +149,17 @@
     "employeeCosts": 2555.0,
     "costOfSales": 2487.0,
     "capexTotal": 362.0,
-    "adjOperatingProfit": 1884.0,
-    "adjPBT": 1797.0,
-    "adjNetProfit": 1471.0,
-    "adjCashFlow": 2230.0,
+    "adjOperatingProfit": 2076.0,
+    "adjPBT": 1916.0,
+    "adjNetProfit": 1543.0,
+    "adjCashFlow": 2009.0,
+    "adjEPS": 80.1,
     "netInterestPaid": 118.0,
     "cashTaxPaid": 342.0,
     "fcfBeforeDividends": 1672.0,
-    "dividendsPaidToShareholders": 920.0
+    "dividendsPaidToShareholders": 920.0,
+    "underlyingRevenueGrowth": -9,
+    "roic": 10.8
   },
   "2021": {
     "year": 2021,
@@ -180,7 +192,9 @@
     "cashTaxPaid": -342.0,
     "fcfBeforeDividends": 1970.0,
     "fcfAfterDividends": 987.0,
-    "dividendsPaidToShareholders": 880.0
+    "dividendsPaidToShareholders": 880.0,
+    "underlyingRevenueGrowth": 7,
+    "roic": 11.9
   },
   "2022": {
     "year": 2022,
@@ -214,7 +228,9 @@
     "cashTaxPaid": -495.0,
     "fcfBeforeDividends": 1970.0,
     "dividendsPaidToShareholders": -983.0,
-    "fcfAfterDividends": 987.0
+    "fcfAfterDividends": 987.0,
+    "underlyingRevenueGrowth": 9,
+    "roic": 12.5
   },
   "2023": {
     "year": 2023,
@@ -249,7 +265,9 @@
     "acqDisposalItems": -56.0,
     "fcfBeforeDividends": 1988.0,
     "dividendsPaidToShareholders": -1059.0,
-    "fcfAfterDividends": 929.0
+    "fcfAfterDividends": 929.0,
+    "underlyingRevenueGrowth": 8,
+    "roic": 14.0
   },
   "2024": {
     "year": 2024,
@@ -286,7 +304,9 @@
     "acqDisposalItems": -62.0,
     "fcfBeforeDividends": 2126.0,
     "dividendsPaidToShareholders": -1121.0,
-    "fcfAfterDividends": 1005.0
+    "fcfAfterDividends": 1005.0,
+    "underlyingRevenueGrowth": 7,
+    "roic": 14.8
   },
   "2025": {
     "year": 2025,
@@ -323,6 +343,8 @@
     "acqDisposalItems": -89.0,
     "fcfBeforeDividends": 2313.0,
     "dividendsPaidToShareholders": -1181.0,
-    "fcfAfterDividends": 1132.0
+    "fcfAfterDividends": 1132.0,
+    "underlyingRevenueGrowth": 7,
+    "roic": 15.4
   }
 }

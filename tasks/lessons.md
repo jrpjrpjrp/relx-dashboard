@@ -172,6 +172,61 @@ Warn after every $1 of estimated spend.
 
 ---
 
+## Data Audit Patterns (2026-03-26)
+
+### Root cause: adj op profit 2017–2020 were all wrong
+The original data had *reported* operating profits stored in the `adjOperatingProfit` field for 2017–2020, with years shifted by one (2020 reported = 1525 was stored as 2019 adj). Fix: always go to primary source Annual Report "Adjusted figures summary" table and cross-check vs the reconciliation footnote (reported → add amortisation → add acq/disposal costs = adjusted).
+
+### Root cause: Exhibitions 2020/2021 AOP errors
+Exhibitions 2020 had value 2252 — this was actually the 2021 group sub-total (not a segment line). Exhibitions 2021 had value 162 = 2022 value duplicated. Always reconcile: sum all segments + unallocated must equal group adj op profit within ~£10m (disclosed central costs). If a segment value is wildly different from trend, treat as suspect.
+
+### Primary source hierarchy for adjusted metrics
+1. Annual Report "Adjusted figures summary" table — most reliable, reconciled
+2. 20-F "Alternative Performance Measures" section — same numbers, more footnotes
+3. Press release results PDF — good for cross-check
+4. Never trust a value that can't be traced to one of the above
+
+### Reconciliation check after any data edit
+Segment data: `sum(seg_revenue) + unallocated ≈ group_revenue` for every year.
+Gaps of -£5m to -£42m are normal (disclosed unallocated central costs).
+A gap >£100m = almost certainly a data error.
+
+---
+
+## Component Patterns (2026-03-26)
+
+### Recharts waterfall chart
+Use stacked bars with an invisible base:
+```tsx
+<Bar dataKey="base" stackId="wf" fill="transparent" legendType="none" />
+<Bar dataKey="value" stackId="wf" ...>
+  {bars.map((b, i) => <Cell key={i} fill={b.color} />)}
+</Bar>
+```
+Pre-compute `base` values by walking a running cursor through the bridge steps.
+Totals (FCF before divs, FCF after divs) reset cursor to 0 base.
+
+### Recharts LabelList formatter TypeScript
+`formatter` on `<LabelList>` has type `LabelFormatter` which expects `label` parameter typed as `RenderableText` (not `number`). Use `as number` cast:
+```tsx
+formatter={(v) => `£${(v as number).toLocaleString()}`}
+```
+Typing `(v: number) =>` directly causes a TS compile error.
+
+### GBP/USD toggle pattern
+- Store `currency: "GBP" | "USD"` state in the top-level `DashboardTabs` component
+- Import `fmtM(value, currency)` from `lib/format.ts` — already handles conversion at 1.25
+- Only wire to KPI monetary values (Revenue, AOP, FCF, Net Debt sub-labels)
+- EPS (pence), margins (%), multiples (×) don't need conversion
+- Toggle button lives in tab bar right-justified, styled as a small mono pill
+
+### STM 2024 restatement annotation
+Add `†` to any year column header that has a known discontinuity: `{y}{y === 2024 ? "†" : ""}`.
+Add a footnote paragraph below the table explaining the restatement.
+Apply consistently across all charts that show that metric (FIG A1, A2, C1–C3).
+
+---
+
 ## RELX-Specific Data (confirmed from Claude app research, FY2025)
 
 ### Group P&L 2025 (£m)
@@ -220,3 +275,17 @@ Corporate unallocated costs netted within segment line in some presentations.
 
 ### Exchange rate
 GBP/USD Jan 1, 2025 = 1.25 (used throughout for USD display)
+
+### ROIC (management KPI, from Annual Report adjusted figures summary)
+| Year | 2017 | 2018 | 2019 | 2020 | 2021 | 2022 | 2023 | 2024 | 2025 |
+|------|------|------|------|------|------|------|------|------|------|
+| ROIC | 12.9% | 13.2% | 13.6% | 10.8% | 11.9% | 12.5% | 14.0% | 14.8% | 15.4% |
+Source: "Key performance indicators" or "Adjusted figures summary" in each year's Annual Report.
+RELX defines ROIC as adjusted operating profit / (average net assets + net debt). Not in XBRL.
+
+### Underlying revenue growth (management KPI, constant FX, excl. acquisitions <12mo, excl. exhibition cycling)
+| Year | 2018 | 2019 | 2020 | 2021 | 2022 | 2023 | 2024 | 2025 |
+|------|------|------|------|------|------|------|------|------|
+| UG % | +4% | +4% | −9% | +7% | +9% | +8% | +7% | +7% |
+Source: CEO letter / KPI summary in Annual Report. Not available for 2016–2017 (pre-standard disclosure).
+2020 drop (-9%) = COVID impact on Exhibitions. 2022 (+9%) = Exhibitions recovery post-COVID.

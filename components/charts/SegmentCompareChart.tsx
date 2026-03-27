@@ -79,7 +79,7 @@ export function SegmentCompareChart({ segmentRows, metric, title, subtitle, yLab
           <thead>
             <tr className="text-[#888] text-[10px] uppercase tracking-wide">
               <td className="py-1 pr-3 font-sans font-semibold">Segment</td>
-              {yearSet.slice(-8).map((y) => <td key={y} className="py-1 px-2 text-right">{y}</td>)}
+              {yearSet.slice(-8).map((y) => <td key={y} className="py-1 px-2 text-right">{y}{y === 2024 ? "†" : ""}</td>)}
             </tr>
           </thead>
           <tbody>
@@ -100,6 +100,10 @@ export function SegmentCompareChart({ segmentRows, metric, title, subtitle, yLab
           </tbody>
         </table>
       </div>
-    </div>
+        <p className="mt-2 text-[10px] text-[#AAA] leading-snug">
+          † FY2024 restated: STM print activities carved out; commercial healthcare reclassified to Risk.
+          STM organic growth was +5% in 2024.
+        </p>
+      </div>
   );
 }

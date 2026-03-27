@@ -30,6 +30,7 @@ interface ChartRow {
   Print?: number;
   total?: number;
   growth?: number;
+  underlyingGrowth?: number;
 }
 
 export function RevenueSegmentChart({ annualRows, segmentRows }: Props) {
@@ -48,6 +49,7 @@ export function RevenueSegmentChart({ annualRows, segmentRows }: Props) {
     const ann = annualMap.get(year);
     row.total = ann?.revenue;
     row.growth = ann?.revenueGrowthYoY;
+    row.underlyingGrowth = ann?.underlyingRevenueGrowth;
     return row;
   });
 
@@ -58,7 +60,7 @@ export function RevenueSegmentChart({ annualRows, segmentRows }: Props) {
           Revenue grows at 8% CAGR (2018–2025), led by Risk and STM digital subscriptions
         </p>
         <p className="text-[11px] text-[#888] italic mt-0.5">
-          Stacked bars = segment revenue (£m) · Line = group YoY growth %
+          Stacked bars = segment revenue (£m) · Solid line = reported YoY growth % · Dashed line = underlying growth % (constant FX, excl. acquisitions)
         </p>
       </div>
       <ResponsiveContainer width="100%" height={320}>
@@ -86,15 +88,19 @@ export function RevenueSegmentChart({ annualRows, segmentRows }: Props) {
             formatter={(value, name) => {
               const v = value as number;
               const n = String(name ?? "");
-              return n === "growth"
-                ? [`${v?.toFixed(1)}%`, "Revenue growth"]
-                : [`£${v?.toLocaleString()}m`, n];
+              if (n === "growth") return [`${v?.toFixed(1)}%`, "Reported growth"];
+              if (n === "underlyingGrowth") return [`${v?.toFixed(0)}%`, "Underlying growth"];
+              return [`£${v?.toLocaleString()}m`, n];
             }}
             contentStyle={{ fontSize: 12, border: "1px solid #EBEBEB" }}
           />
           <Legend
             wrapperStyle={{ fontSize: 13, paddingTop: 8 }}
-            formatter={(v) => v === "growth" ? "Growth %" : v}
+            formatter={(v) => {
+              if (v === "growth") return "Reported growth %";
+              if (v === "underlyingGrowth") return "Underlying growth %";
+              return v;
+            }}
           />
           {(["Risk", "STM", "Legal", "Exhibitions", "Print"] as const).map((seg) => (
             <Bar
@@ -116,6 +122,17 @@ export function RevenueSegmentChart({ annualRows, segmentRows }: Props) {
             dot={{ r: 3, fill: "#0B2342" }}
             connectNulls
           />
+          <Line
+            yAxisId="right"
+            type="monotone"
+            dataKey="underlyingGrowth"
+            name="underlyingGrowth"
+            stroke="#0B2342"
+            strokeWidth={1.5}
+            strokeDasharray="5 3"
+            dot={false}
+            connectNulls
+          />
         </ComposedChart>
       </ResponsiveContainer>
 
@@ -126,7 +143,7 @@ export function RevenueSegmentChart({ annualRows, segmentRows }: Props) {
             <tr className="text-[#888] text-[10px] uppercase tracking-wide">
               <td className="py-1 pr-3 font-sans font-semibold">Segment (£m)</td>
               {yearSet.slice(-8).map((y) => (
-                <td key={y} className="py-1 px-2 text-right">{y}</td>
+                <td key={y} className="py-1 px-2 text-right">{y}{y === 2024 ? "†" : ""}</td>
               ))}
             </tr>
           </thead>
@@ -157,7 +174,7 @@ export function RevenueSegmentChart({ annualRows, segmentRows }: Props) {
               })}
             </tr>
             <tr className="border-t border-[#F3F3F3] text-[#6B7280]">
-              <td className="py-1 pr-3 font-sans text-[11px]">YoY growth %</td>
+              <td className="py-1 pr-3 font-sans text-[11px]">Reported growth %</td>
               {yearSet.slice(-8).map((y) => {
                 const row = data.find((d) => d.year === y);
                 return (
@@ -167,9 +184,24 @@ export function RevenueSegmentChart({ annualRows, segmentRows }: Props) {
                 );
               })}
             </tr>
+            <tr className="border-t border-[#F3F3F3] text-[#6B7280]">
+              <td className="py-1 pr-3 font-sans text-[11px]">Underlying growth %</td>
+              {yearSet.slice(-8).map((y) => {
+                const row = data.find((d) => d.year === y);
+                return (
+                  <td key={y} className="py-1 px-2 text-right">
+                    {row?.underlyingGrowth != null ? `${row.underlyingGrowth.toFixed(0)}%` : "—"}
+                  </td>
+                );
+              })}
+            </tr>
           </tbody>
         </table>
       </div>
-    </div>
+        <p className="mt-2 text-[10px] text-[#AAA] leading-snug">
+          † FY2024 restated: STM print activities carved out into separate &apos;Print &amp; Related&apos; line;
+          commercial healthcare reclassified to Risk. STM organic growth was +5% in 2024.
+        </p>
+      </div>
   );
 }

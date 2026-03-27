@@ -115,8 +115,8 @@
     "year": 2020,
     "segment": "Exhibitions",
     "revenue": 362.0,
-    "adjOpProfit": 2252.0,
-    "adjOpMargin": 622.1
+    "adjOpProfit": -164.0,
+    "adjOpMargin": -45.3
   },
   {
     "year": 2020,
@@ -143,8 +143,8 @@
     "year": 2021,
     "segment": "Exhibitions",
     "revenue": 534.0,
-    "adjOpProfit": 162.0,
-    "adjOpMargin": 30.3
+    "adjOpProfit": 10.0,
+    "adjOpMargin": 1.9
   },
   {
     "year": 2021,

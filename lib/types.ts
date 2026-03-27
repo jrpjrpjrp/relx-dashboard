@@ -49,6 +49,10 @@ export interface AnnualRow {
   dividendsPaidToShareholders?: number;
   fcfAfterDividends?: number;
 
+  // Management KPIs (from Annual Report adjusted figures summary)
+  underlyingRevenueGrowth?: number; // % — excludes FX, acquisitions, exhibition cycling
+  roic?: number;                    // % — return on invested capital (company definition)
+
   // Derived (computed in data.ts)
   revenueGrowthYoY?: number;        // %
   adjOperatingMargin?: number;      // %

@@ -79,15 +79,39 @@ Sources: cash flow statement in 20-F + press releases
 - [x] FIG C3: SegmentCompareChart(revenueGrowthYoY) — 4-line growth trend
 - [x] FIG C4: Latest year snapshot table — revenue, share, AOP, margin
 
+### Phase 6.5 — Dashboard Enhancements (from audit, 2026-03-26)
+Data bugs — FIXED:
+- [x] Exhibitions 2020 AOP: 2252 → -164 (was group sub-total, not segment value)
+- [x] Exhibitions 2021 AOP: 162 → 10 (FY2022 value was duplicated into 2021)
+- [x] Group adj op profit 2016–2020: all wrong (reported values mixed with adj, off by year)
+  - 2016: added 2114 (was missing) | 2017: 1964→2284 | 2018: 2101→2346
+  - 2019: 1525→2491 | 2020: 1884→2076
+- [x] Adj PBT/net/cash/EPS 2017–2020: fixed to match primary source Annual Reports
+- [x] Revenue 2015–2017: added (5971/6889/7341) — was missing, broke margin calc
+- [x] Removed garbage EBITDA values for 2018–2019 (were storing ND/EBITDA ratios)
+- [x] STM 2024 discontinuity: annotated † on all segment charts + footnote
+
+Value-add backlog (from 2026-03-26 brainstorm):
+- [x] Add cumulative capital returns chart (FIG B4 — stacked area + total line, 2020–2025)
+- [x] Add cash conversion KPI card (adjCashFlow / adjOpProfit — replaces DPS in Group Overview strip)
+- [x] Add scatter plot: segment adj margin vs. YoY growth (FIG C5, Tab 3)
+- [x] GBP/USD toggle — toggle button in tab bar, fmtM() wired to KPI monetary values
+- [x] Add underlying growth field to AnnualRow — 2018–2025 from primary Annual Reports; dashed line on FIG A1
+- [x] Add ROIC KPI card — 2017–2025 from Annual Reports; 7th card in Group Overview strip
+- [x] Full FCF waterfall — FIG B5: adjCashFlow → interest → tax → acq/disposal → FCF before divs → dividends → FCF after divs
+
 ### Phase 7 — Individual Segment Tabs (Tabs 4–7)
 One tab per segment: Risk Solutions | STM | Legal | Exhibitions
 Each tab contains:
-- [ ] KPI strip: Revenue, Margin, YoY Growth, Share of Group
-- [ ] Revenue trend chart (bars + growth line)
-- [ ] Margin trend chart (adj. op margin %)
-- [ ] Business brief: what the segment does, key products, competitive moat
+- [x] KPI strip: Revenue, AOP, Margin, Share of Group, CAGR
+- [x] Revenue trend chart (bars + growth line)
+- [x] Margin trend chart (segment vs group average, with premium row)
+- [x] Business brief: description, key facts, competitive moat
 
-Phase 7 is lower priority than Phases 4–6 — defer until group-level view is solid.
+- [x] Tab 4: Risk Solutions (2026-03-26) — SegmentDeepDiveTab component (reusable)
+- [x] Tab 5: STM (2026-03-26)
+- [x] Tab 6: Legal (2026-03-26)
+- [x] Tab 7: Exhibitions (2026-03-26)
 
 ### Phase 8 — Intelligence layer (optional, post-MVP)
 Analogous to FCC Intelligence tab in ProjectSmile:
@@ -109,6 +133,7 @@ Note: RELX earnings transcripts available via Seeking Alpha / Insider Monkey for
 - [x] Phase 2 data pipeline (2026-03-24): relx-financials.json, relx-segments.json, relx-capalloc.json
 - [x] Phase 3 TypeScript loaders (2026-03-24)
 - [x] Phases 4–6 dashboard MVP (2026-03-24): 3 tabs, 8 charts, KPI strip, data tables
+- [x] Phase 6.5 data audit & fixes (2026-03-26): 3 data bugs fixed, 2016–2020 adj metrics corrected from primary sources, STM restatement annotated
 
 ---
 
