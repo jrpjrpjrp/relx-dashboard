@@ -289,3 +289,28 @@ RELX defines ROIC as adjusted operating profit / (average net assets + net debt)
 | UG % | +4% | +4% | −9% | +7% | +9% | +8% | +7% | +7% |
 Source: CEO letter / KPI summary in Annual Report. Not available for 2016–2017 (pre-standard disclosure).
 2020 drop (-9%) = COVID impact on Exhibitions. 2022 (+9%) = Exhibitions recovery post-COVID.
+
+---
+
+## Intelligence Corpus Pipeline (2026-03-28)
+
+### Source selection
+Seeking Alpha and Quartr both serve JS-rendered pages — pdfplumber on RELX IR PDFs is faster and more complete.
+RELX IR transcripts are official BRR Media transcriptions — higher quality than SA (no paywall truncation).
+EDGAR 20-F HTML is text-extractable at ~200-300K chars per filing; regex-filter to Risk sections before Claude.
+
+### Claude extraction — JSON truncation fix
+With max_tokens=4096 and batch_size=15 turns: Claude truncates mid-JSON on large batches → 0 chunks saved.
+Fix: max_tokens=8192 + batch_size=6 turns per API call. No truncation observed after fix.
+Always cache per-doc results — re-runs skip cached files, so partial failures are cheap to fix.
+
+### Corpus shape (452 chunks, $3.71)
+investor_day (159) > earnings_call (147) > mda_narrative (33)
+Risk teach-ins (2018, 2021, 2023) are the densest LNRS source — 3 docs = ~180 chunks.
+Q&A exchanges (50 total): Barclays most active analyst on LNRS questions.
+Top topics by frequency: fraud > identity > AI > insurance > competitive > M&A > international
+
+### Cost profile
+Sonnet 4.6: ~$3.71 for 452 chunks across 34 docs + 7 years MD&A.
+240K input + 139K output tokens total (both runs combined).
+Flat-text docs (no speaker turns) cost more per chunk — more API calls per doc due to chunk-based processing.

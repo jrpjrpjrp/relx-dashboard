@@ -113,18 +113,38 @@ Each tab contains:
 - [x] Tab 6: Legal (2026-03-26)
 - [x] Tab 7: Exhibitions (2026-03-26)
 
-### Phase 8 — Intelligence layer (optional, post-MVP)
-Analogous to FCC Intelligence tab in ProjectSmile:
-- [ ] Scrape MD&A passages per segment from 20-F HTML
-- [ ] Claude API extraction: strategic narrative, risks, growth drivers per segment per year
-- [ ] "By Year" + "Compare by Topic" modes in a dedicated Intelligence tab
-Note: RELX earnings transcripts available via Seeking Alpha / Insider Monkey for qualitative layer.
+### Phase 8 — Intelligence layer (IN PROGRESS, 2026-03-28)
+Goal: Deep LNRS research corpus — all qualitative + quantitative RELX comms about Risk Solutions.
+Sources: PDF transcripts (RELX IR, 34 docs) + EDGAR 20-F HTML. SA/Quartr both JS/paywalled — not viable.
+Model: Claude Sonnet 4.6. Budget: <$10, alert every $1.
+
+Step 1 — PDF extraction [COMPLETE]
+- [x] scripts/parse_transcripts.py -> data/cache/text/{stem}.json (34 docs, 30 structured / 4 flat)
+- [x] Key LNRS docs: risk-teach-in-transcript (128 turns), risk-seminar-2023 (44t), risk-teach-in-8Nov18 (71Kch)
+- [x] data/cache/text/index.json
+
+Step 2 — EDGAR 20-F MD&A [COMPLETE]
+- [x] scripts/fetch_edgar_mda.py -> data/cache/mda/{year}_risk.txt (FY2019-2025)
+- [x] 93K chars total Risk-section text extracted
+
+Step 3 — Claude corpus build [COMPLETE]
+- [x] scripts/build_intel_corpus.py -> data/relx-intel-corpus.json
+- [x] 452 chunks | $3.71 spent (budget remaining: $6.29)
+- [x] 50 Q&A exchanges | 159 investor day | 147 earnings call | 33 MD&A
+- [x] Top topics: fraud, identity, AI, insurance, competitive, M&A, international
+- [x] Analyst coverage: Barclays(7), MS(4), Citi/GS/HSBC(3 each)
+- [x] Lesson: max_tokens=8192 + batch_size=6 required to avoid JSON truncation
+
+Step 4 — Tab 8 Intelligence UI [IN PROGRESS]
+- [ ] components/IntelligenceTab.tsx — browse/filter corpus
+- [x] Views: Q&A Catalogue | Management Narrative | Search
+- [x] Wire into DashboardTabs as Tab 8
 
 ### Phase 9 — Deploy
-- [ ] npm run build passes clean
-- [ ] Push to GitHub repo (create: relx-dashboard)
-- [ ] Connect Vercel — Output Directory = out, same as ProjectSmile
-- [ ] Auto-deploy on push to main
+- [x] npm run build passes clean (2026-03-28)
+- [ ] Push to GitHub repo (relx-dashboard — remote already configured)
+- [ ] Verify Vercel auto-deploy triggered
+- [ ] Confirm live URL
 
 ---
 
@@ -134,6 +154,8 @@ Note: RELX earnings transcripts available via Seeking Alpha / Insider Monkey for
 - [x] Phase 3 TypeScript loaders (2026-03-24)
 - [x] Phases 4–6 dashboard MVP (2026-03-24): 3 tabs, 8 charts, KPI strip, data tables
 - [x] Phase 6.5 data audit & fixes (2026-03-26): 3 data bugs fixed, 2016–2020 adj metrics corrected from primary sources, STM restatement annotated
+- [x] Phase 7 segment tabs (2026-03-26): Risk, STM, Legal, Exhibitions deep-dive tabs
+- [x] Phase 8 Intelligence layer (2026-03-28): 452-chunk LNRS corpus, Tab 8 UI, $3.71 total API cost
 
 ---
 

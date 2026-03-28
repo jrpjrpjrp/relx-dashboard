@@ -14,6 +14,7 @@ import { SegmentScatterChart } from "./charts/SegmentScatterChart";
 import { CumulativeReturnsChart } from "./charts/CumulativeReturnsChart";
 import { FcfWaterfallChart } from "./charts/FcfWaterfallChart";
 import { SegmentDeepDiveTab } from "./SegmentDeepDiveTab";
+import { IntelligenceTab } from "./IntelligenceTab";
 
 const TABS = [
   "Group Overview",
@@ -23,6 +24,7 @@ const TABS = [
   "STM",
   "Legal",
   "Exhibitions",
+  "Intelligence",
 ] as const;
 type Tab = (typeof TABS)[number];
 
@@ -291,6 +293,9 @@ export function DashboardTabs({ annualRows, segmentRows, capitalRows }: Props) {
       {active === "Exhibitions" && (
         <SegmentDeepDiveTab segmentName="Exhibitions" segmentRows={segmentRows} annualRows={annualRows} figPrefix="G" />
       )}
+
+      {/* ── TAB 8: Intelligence ───────────────────────────────────────────────── */}
+      {active === "Intelligence" && <IntelligenceTab />}
     </div>
   );
 }

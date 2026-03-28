@@ -6,6 +6,12 @@ node_modules/
 # Data cache (large HTML files)
 data/cache/
 
+# PDF transcripts (large, sourced from RELX IR)
+transcripts/
+
+# Claude Code project files
+.claude/
+
 # Env
 .env*
 
